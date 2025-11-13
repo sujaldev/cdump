@@ -12,6 +12,31 @@ class TicTacToe {
     };
 
     char checkWinner() const {
+        // Horizontal
+        for (int row = 0; row < 3; row++) {
+            char mark = board[row][0];
+            if (mark == ' ')
+                continue;
+            if (board[row][1] == mark && board[row][2] == mark)
+                return mark;
+        }
+
+        // Vertical
+        for (int col = 0; col < 3; col++) {
+            char mark = board[0][col];
+            if (mark == ' ')
+                continue;
+            if (board[1][col] == mark && board[2][col] == mark)
+                return mark;
+        }
+
+        // Diagonals
+        char mark = board[1][1];
+        if (mark == ' ')
+            return ' ';
+        if ((board[0][0] == mark && board[2][2] == mark) || (board[0][2] == mark && board[2][0] == mark))
+            return mark;
+
         return ' ';
     }
 
