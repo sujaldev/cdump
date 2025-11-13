@@ -11,6 +11,10 @@ class TicTacToe {
         {' ', ' ', ' '}
     };
 
+    char checkWinner() const {
+        return ' ';
+    }
+
     std::pair<int, int> getMove(char player) {
         int row, col;
         char comma;
@@ -38,6 +42,18 @@ class TicTacToe {
         return {row, col};
     }
 
+    bool processMove(char player) {
+        printBoard();
+        getMove(player);
+        char winner = checkWinner();
+        if (winner == x || winner == o) {
+            printBoard();
+            std::cout << "Player '" << winner << "' wins!\n";
+            return true;
+        }
+        return false;
+    }
+
 public:
     void printBoard() const {
         std::cout
@@ -59,10 +75,9 @@ public:
 
     void run() {
         while (true) {
-            printBoard();
-            getMove(x);
-            printBoard();
-            getMove(o);
+            if (processMove(x) || processMove(o)) {
+                break;
+            }
         }
     }
 };
