@@ -32,6 +32,9 @@ int list_append(struct PyList *list, const char *value) {
      */
 
     struct PyListNode *node = malloc(sizeof(struct PyListNode));
+    if (node == NULL)
+        return -1;
+
     node->value = strdup(value);
     if (node->value == NULL) {
         free(node);
