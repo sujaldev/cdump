@@ -53,11 +53,6 @@ int list_append(struct PyList *list, const char *value) {
 }
 
 void list_del(struct PyList *list) {
-    if (list->length == 0) {
-        free(list);
-        return;
-    }
-
     struct PyListNode *node = list->head;
     while (node != NULL) {
         free(node->value);
@@ -65,6 +60,7 @@ void list_del(struct PyList *list) {
         free(node);
         node = next_node;
     }
+    free(list);
 }
 
 void list_print(const struct PyList *list) {
